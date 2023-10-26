@@ -9,6 +9,9 @@ function App() {
   const [infoClima, setInfoClima] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const apiUrl = import.meta.env.VITE_API_URL
+  console.log('SOY APIURL', apiUrl)
+
   const handleChange = (e) => {
 
     const value = e.target.value;
@@ -23,7 +26,7 @@ function App() {
     } else {
       try {
         setLoading(true);
-        const response = await axios.post(`http://backend-java-clima.micaela-araujo-dev.svc.cluster.local:8082/buscarclima?region=${region}`);
+        const response = await axios.post(apiUrl+region);
         console.log('Respuesta del servidor:', response.data);
         setInfoClima(response.data);
         setLoading(false);
